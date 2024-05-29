@@ -81,12 +81,14 @@ to anyone browsing your repository's source code.
 | `region`                | (required) The name of the S3 region.                                                                                                           | `"us-east-1"` |
 | `source`                | (required) The local directory or file you wish to upload to S3.                                                                                |               |
 | `destination`           | (required) The destination directory in S3.                                                                                                     |               |
-| `acl`                   | (required) S3 access control lists (ACL). [More info here.](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl) | `"private"`   |
+| `acl`                   | (optional) S3 access control lists (ACL). [More info here.](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl) | `"private"`   |
 | `endpoint`              | (optional) The endpoint URI to send requests to. [More info here.](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html)             |               |
+<!-- | `cache_control`         | (optional) The Cache-Control general-header. [More info here.](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)             |               | -->
 
 Notes:
 
 - Set `destination` to an empty string `""` to upload to S3's root directory.
+- Set `destination` to a file name, e.g.: `"me.json"` (or `"path/to/me.json"`) to rename a single file that is being uploaded.
 - **Do not set the following backslash** at the end of `source` and `destination` directory names.
 
 ## Action outputs

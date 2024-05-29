@@ -4,14 +4,14 @@
 // - https://github.com/stcalica/s3-upload/tree/master
 // - https://www.howtogeek.com/devops/how-to-upload-to-amazon-s3-from-github-actions/
 
-const core = require("@actions/core")
-// const github = require("@actions/github")
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3")
-// const { Upload } = require("@aws-sdk/lib-storage")
-const fs = require("fs")
-const mime = require("mime")
-// const path = require("path")
-const readdir = require("recursive-readdir")
+import core from "@actions/core"
+// import github from "@actions/github"
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
+// import { Upload } from "@aws-sdk/lib-storage"
+import fs from "fs"
+import mime from "mime"
+// import path from "path"
+import readdir from "recursive-readdir"
 
 const source = core.getInput("source")
 const destination = core.getInput("destination")
