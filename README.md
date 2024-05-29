@@ -38,7 +38,8 @@ jobs:
 
 ### Recursive directory upload
 
-The following will upload all 4 files:
+The following will upload all 4 files from _/tmp/path_ absolute path and save them with a
+_path/on/s3/_ prefix:
 
 ```yaml
 name: Test Run
@@ -69,4 +70,5 @@ jobs:
 
 ## API:
 
-1. 
+1. Set `destination` to an empty string `""` to skip the S3 "directories" (prefixed names).
+2. Do not set the following backslash at the end of `source` and `destination` directory names.
