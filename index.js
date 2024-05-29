@@ -6,9 +6,10 @@
 
 const core = require("@actions/core")
 // const github = require("@actions/github")
-const { S3Client } = require("@aws-sdk/client-s3")
-const { Upload } = require("@aws-sdk/lib-storage")
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3")
+// const { Upload } = require("@aws-sdk/lib-storage")
 const fs = require("fs")
+const mime = require("mime")
 // const path = require("path")
 const readdir = require("recursive-readdir")
 
@@ -19,6 +20,7 @@ const secretAccessKey = core.getInput("secret_access_key")
 const region = core.getInput("region")
 const bucket = core.getInput("bucket")
 const endpoint = core.getInput("endpoint")
+const cacheControl = core.getInput("cache_control")
 const acl = core.getInput("acl")
 
 const client = new S3Client({
@@ -28,16 +30,27 @@ const client = new S3Client({
   ...endpoint && { endpoint },
 })
 
-const upload = async ({ pathname, destination, acl }) => {
-  const result = await new Upload({
-    client,
-    params: {
-      ACL: acl,
-      Bucket: bucket,
-      Key: destination,
-      Body: fs.readFileSync(pathname),
-    }
-  }).done()
+const upload = async ({ source, destination }) => {
+  // const result = await new Upload({
+  //   client,
+  //   params: {
+  //     ACL: acl,
+  //     Bucket: bucket,
+  //     Key: destination,
+  //     Body: fs.readFileSync(source),
+  //   }
+  // }).done()
+  const contentType = mime.getType(source)
+  // up to 50MB / 5GB?
+  const command = new PutObjectCommand({
+    Bucket: bucket,
+    Key: destination,
+    Body: fs.readFileSync(source),
+    ...acl && { ACL: acl },
+    ...cacheControl && { CacheControl: cacheControl },
+    ...contentType && { ContentType: contentType },
+  })
+  const result = await client.send(uploadCommand)
 
   return result
 }
@@ -49,7 +62,7 @@ const main = async () => {
 
     if (fs.lstatSync(source).isFile()) {
       // upload a single file
-      const result = await upload({ pathname: source, destination, acl })
+      const result = await upload({ source, destination })
       console.info("npm @aws-sdk/lib-storage: new Upload({ ... }).done() response", result)
     } else {
       // upload directories recursively
@@ -61,9 +74,8 @@ const main = async () => {
           .replace(/^\//, "") // root slash
 
         return upload({
-          pathname: absolutePath,
+          source: absolutePath,
           destination: `${destination}/${relativePath}`,
-          acl
         })
       })
       const result = await Promise.all(uploads)
