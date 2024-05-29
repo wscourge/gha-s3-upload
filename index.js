@@ -50,7 +50,7 @@ const upload = async ({ source, destination }) => {
     ...cacheControl && { CacheControl: cacheControl },
     ...contentType && { ContentType: contentType },
   })
-  const result = await client.send(uploadCommand)
+  const result = await client.send(command)
 
   return result
 }
