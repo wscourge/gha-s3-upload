@@ -1,0 +1,35 @@
+{
+  "name": "gha-s3-upload",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wscourge/gha-s3-upload.git"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "s3",
+    "aws",
+    "upload"
+  ],
+  "author": "Wiktor Plaga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wscourge/gha-s3-upload/issues"
+  },
+  "homepage": "https://github.com/wscourge/gha-s3-upload#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "@aws-sdk/client-s3": "^3.583.0",
+    "@aws-sdk/lib-storage": "^3.583.0",
+    "@types/node": "^20.12.12",
+    "aws-sdk": "^2.1629.0",
+    "recursive-readdir": "^2.2.3"
+  }
+}
