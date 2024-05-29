@@ -73,21 +73,21 @@ jobs:
 Sensitive information, especially `key_id` and `secret_access_key`, should be [set as encrypted secrets](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables) — otherwise, they'll be public
 to anyone browsing your repository's source code.
 
-| variable                | description                                                                                                                                     | default   |
-|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|-----------| 
-| `access_key_id`         | (Required) Your S3 Access Key. [More info here.](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)                   |           |
-| `secret_access_key`     | (Required) Your S3 Secret Access Key. [More info here.](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)            |           |
-| `bucket`                | (Required) The name of the S3 bucket.                                                                                                           |           |
-| `region`                | (Required) The name of the S3 region.                                                                                                           | us-east-1 |
-| `source`                | (Required) The local directory or file you wish to upload to S3.                                                                                |           |
-| `destination`           | (Required) The destination directory in S3.                                                                                                     |           |
-| `acl`                   | (Required) S3 access control lists (ACL). [More info here.](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl) | private   |
-| `endpoint`              | (Optional) The endpoint URI to send requests to. [More info here.](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html)             |           |
+| variable                | description                                                                                                                                     | default       |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------------| 
+| `access_key_id`         | (required) Your S3 Access Key. [More info here.](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)                   |               |
+| `secret_access_key`     | (required) Your S3 Secret Access Key. [More info here.](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)            |               |
+| `bucket`                | (required) The name of the S3 bucket.                                                                                                           |               |
+| `region`                | (required) The name of the S3 region.                                                                                                           | `"us-east-1"` |
+| `source`                | (required) The local directory or file you wish to upload to S3.                                                                                |               |
+| `destination`           | (required) The destination directory in S3.                                                                                                     |               |
+| `acl`                   | (required) S3 access control lists (ACL). [More info here.](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl) | `"private"`   |
+| `endpoint`              | (optional) The endpoint URI to send requests to. [More info here.](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html)             |               |
 
 Notes:
 
-- Set `destination` to an empty string `""` to upload to S3's root directory (skip the S3 "directories").
-- Do not set the following backslash at the end of `source` and `destination` directory names.
+- Set `destination` to an empty string `""` to upload to S3's root directory.
+- **Do not set the following backslash** at the end of `source` and `destination` directory names.
 
 ## Action outputs
 
