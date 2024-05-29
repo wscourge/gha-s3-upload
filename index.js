@@ -58,7 +58,7 @@ const main = async () => {
         const relativePath = absolutePath
           .replace(source, "") // absolute path directory prefix
           .replaceAll("\\", "/") // windows \ paths
-          .replace("^/", "") // root slash
+          .replace(/^\//, "") // root slash
 
         return upload({
           pathname: absolutePath,
