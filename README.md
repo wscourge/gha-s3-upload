@@ -28,7 +28,7 @@ jobs:
         with:
           source: "/tmp/path/to/dir/file.txt"
           destination: "path/on/s3"
-          region: ${{ vars.S3_ENDPOINT }}
+          region: ${{ vars.S3_REGION }}
           bucket: "my-bucket"
           endpoint: ${{ vars.S3_ENDPOINT }}
           access_key_id: ${{ secrets.S3_ACCESS_KEY_ID }}
@@ -61,7 +61,7 @@ jobs:
         with:
           source: "/tmp/path"
           destination: "path/on/s3"
-          region: "us-east-1"
+          region: ${{ vars.S3_REGION }}
           bucket: "my-bucket"
           endpoint: ${{ vars.S3_ENDPOINT }}
           access_key_id: ${{ secrets.S3_ACCESS_KEY_ID }}
@@ -91,7 +91,7 @@ Notes:
 
 ## Action outputs
 
-TODO
+**TODO:** `s3_response` with an array of `$metadata` and `Location` response body fields for each uploaded file.
 
 <!-- | name               | description                                                                             |
 | ------------------ | --------------------------------------------------------------------------------------- |
