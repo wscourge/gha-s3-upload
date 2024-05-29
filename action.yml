@@ -1,4 +1,4 @@
-name: "S3 Upload Action"
+name: "S3 Upload Cross-Platform"
 description: "A cross-platform (Node.js-based) Github Action to upload files and/or directories to S3-compatible storage providers."
 author: "Wiktor Plaga"
 branding:
