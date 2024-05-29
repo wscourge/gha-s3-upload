@@ -92,6 +92,7 @@ Notes:
 ## Action outputs
 
 **TODO:** `s3_response` with an array of `$metadata` and `Location` response body fields for each uploaded file.
+**TODO:** update to use https://github.com/actions/javascript-action as a scaffold.
 
 <!-- | name               | description                                                                             |
 | ------------------ | --------------------------------------------------------------------------------------- |

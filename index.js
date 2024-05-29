@@ -56,8 +56,9 @@ const main = async () => {
       const files = await readdir(source)
       const uploads = files.map(absolutePath => {
         const relativePath = absolutePath
+          .replace(source, "") // absolute path directory prefix
           .replaceAll("\\", "/") // windows \ paths
-          .replace(`${source}/`, "")
+          .replace("^/", "") // root slash
 
         return upload({
           pathname: absolutePath,
