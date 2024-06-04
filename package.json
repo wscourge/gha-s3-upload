@@ -1,7 +1,7 @@
 {
   "name": "gha-s3-upload",
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,6 @@
     "@actions/github": "^6.0.0",
     "@aws-sdk/client-s3": "^3.583.0",
     "@types/node": "^20.12.12",
-    "lodash": "^4.17.21",
     "mime": "^4.0.3",
     "recursive-readdir": "^2.2.3"
   }

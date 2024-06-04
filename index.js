@@ -9,7 +9,7 @@ import core from "@actions/core"
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
 // import { Upload } from "@aws-sdk/lib-storage"
 import fs from "fs"
-import { chunk } from "lodash"
+// import { chunk } from "lodash"
 import mime from "mime"
 // import path from "path"
 import readdir from "recursive-readdir"
@@ -23,6 +23,11 @@ const bucket = core.getInput("bucket")
 const endpoint = core.getInput("endpoint")
 const cacheControl = core.getInput("cache_control")
 const acl = core.getInput("acl")
+
+const chunk = (array, size) => Array(Math.ceil(array.length / size))
+  .fill()
+  .map((_, index) => index * size)
+  .map(begin => array.slice(begin, begin + size));
 
 const client = new S3Client({
   forcePathStyle: true,
@@ -81,7 +86,7 @@ const main = async () => {
         })
       })
       console.info(`Uploading ${uploads.length} files.`)
-      const chunks = chunk(uploads, 4)
+      const chunks = chunk(uploads, 2)
       while (chunks.length) {
         const batch = chunks.pop()
         const result = await Promise.all(batch)
