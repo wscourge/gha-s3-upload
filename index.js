@@ -9,6 +9,7 @@ import core from "@actions/core"
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
 // import { Upload } from "@aws-sdk/lib-storage"
 import fs from "fs"
+import { chunk } from "lodash"
 import mime from "mime"
 // import path from "path"
 import readdir from "recursive-readdir"
@@ -62,6 +63,7 @@ const main = async () => {
 
     if (fs.lstatSync(source).isFile()) {
       // upload a single file
+      console.info("Uploading a single file.\nSource:", source, "\nDestination:", destination)
       const result = await upload({ source, destination })
       console.info("npm @aws-sdk/lib-storage: new Upload({ ... }).done() response", result)
     } else {
@@ -78,8 +80,14 @@ const main = async () => {
           destination: `${destination}/${relativePath}`,
         })
       })
-      const result = await Promise.all(uploads)
-      console.info("npm @aws-sdk/lib-storage: [new Upload({ ... }).done(), ...] response", result)
+      console.info(`Uploading ${uploads.length} files.`)
+      const chunks = chunk(uploads, 4)
+      while (chunks.length) {
+        const batch = chunks.pop()
+        const result = await Promise.all(batch)
+        console.info(`Batch ${chunks.length} result:`, result)
+        await new Promise((resolve) => setTimeout(resolve, 3000))
+      }
     }
   } catch (error) {
    core.setFailed(error.message);
