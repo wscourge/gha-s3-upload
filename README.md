@@ -1,6 +1,6 @@
-# S3 Upload Github Action
+# S3 Upload GitHub Action
 
-A cross-platform (Node.js-based) Github Action to upload files and/or
+A cross-platform (Node.js-based) GitHub Action to upload files and/or
 directories to S3-compatible storage providers.
 
 ## Usage
@@ -70,40 +70,26 @@ jobs:
 ## Action inputs
 
 Sensitive information, especially `key_id` and `secret_access_key`, should be
-[set as encrypted secrets](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables)
-— otherwise, they'll be public to anyone browsing your repository's source code.
+[set as encrypted secrets][gha-secrets] — otherwise, they'll be public to anyone
+browsing your repository's source code.
 
-| variable            | required | description                                                                                                               | default       |
-| ------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `access_key_id`     | yes      | Your S3 Access Key. [More info here.](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)        |               |
-| `secret_access_key` | yes      | Your S3 Secret Access Key. [More info here.](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html) |               |
-| `bucket`            | yes      | The name of the S3 bucket.                                                                                                |               |
-| `region`            | yes      | The name of the S3 region.                                                                                                | `"us-east-1"` |
-| `source`            | yes      | The local directory or file you wish to upload to S3.                                                                     |               |
-| `destination`       | yes      | The destination directory in S3.                                                                                          |               |
-| `endpoint`          | no       | The endpoint URI to send requests to. [More info here.](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html)  |               |
-
----
-
-<!-- | `acl`                   | no       | S3 access control lists (ACL). [More info here.](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl) | `"private"`   | -->
-<!-- | `cache_control`         | no       | The Cache-Control general-header. [More info here.](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)             |               | -->
+| variable            | required | description                                                    | default       |
+| ------------------- | -------- | -------------------------------------------------------------- | ------------- |
+| `access_key_id`     | yes      | Your S3 Access Key. [See this.][s3-access-key-id]              |               |
+| `secret_access_key` | yes      | Your S3 Secret Access Key. [See this.][s3-secret-key]          |               |
+| `bucket`            | yes      | The name of the S3 bucket.                                     |               |
+| `region`            | yes      | The name of the S3 region.                                     | `"us-east-1"` |
+| `source`            | yes      | The local directory or file you wish to upload to S3.          |               |
+| `destination`       | yes      | The destination directory in S3.                               |               |
+| `endpoint`          | no       | The endpoint URI to send requests to. [See this.][s3-endpoint] |               |
 
 Notes:
 
 - Set `destination` to an empty string `""` to upload to S3's root directory.
-- Set `destination` to a file name, e.g.: `"me.json"` (or `"path/to/me.json"`)
-  to rename a single file that is being uploaded.
+- Set `destination` to a filename, e.g.: `"me.json"` (or `"path/to/me.json"`) to
+  rename a single file that is being uploaded.
 - **Do not set the following backslash** at the end of `source` and
   `destination` directory names.
-
-<!-- ## Action outputs -->
-
-<!-- **TODO:** `s3_response` with an array of `$metadata` and `Location` response
-body fields for each uploaded file. -->
-
-<!-- | name               | description                                                                             |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| `s3_response`      | `$metadata` and `Location` response body fields                                         | -->
 
 ## Development
 
@@ -147,3 +133,11 @@ need to perform some initial setup steps before you can develop your action.
 
    ...
    ```
+
+[gha-secrets]:
+  https://help.github.com/en/articles/virtual-environments-for-github-actions
+[s3-access-key-id]:
+  https://docs.aws.amazon.com/IAM/latest/UserGuide/security-creds.html
+[s3-secret-key]:
+  https://docs.aws.amazon.com/IAM/latest/UserGuide/security-creds.html
+[s3-endpoint]: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
