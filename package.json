@@ -2,7 +2,7 @@
   "name": "gha-s3-upload",
   "description": "A cross-platform (Node.js-based) Github Action to upload files and/or directories to S3-compatible storage providers.",
   "license": "MIT",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "author": "Wiktor Plaga",
   "homepage": "https://github.com/wscourge/gha-s3-upload",
   "repository": {
