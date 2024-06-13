@@ -1,36 +1,46 @@
-name: "S3 Upload Cross-Platform"
-description: "A cross-platform (Node.js-based) Github Action to upload files and/or directories to S3-compatible storage providers."
-author: "Wiktor Plaga"
+name: 'S3 Upload Cross-Platform'
+description:
+  'A cross-platform (Node.js-based) Github Action to upload files and/or
+  directories to S3-compatible storage providers.'
+author: 'Wiktor Plaga'
 branding:
-  icon: "upload"
-  color: "gray-dark"
+  icon: 'upload'
+  color: 'gray-dark'
 inputs:
   source:
-    description: "File system path to a source file or directory. Do not use backslash \"/\" at the end."
+    description:
+      'File system path to a source file or directory. Do not use backslash "/"
+      at the end.'
     required: true
-  destination: 
-    description: "S3 file or directory name. Do not use backslash \"/\" at the end."
+  destination:
+    description:
+      'S3 file or directory name. Do not use backslash "/" at the end.'
     required: true
-  acl:
-    description: "S3 access control lists (ACL). See: https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl"
-    required: true
-    default: "private"
+  # acl:
+  #   description:
+  #     'S3 access control lists (ACL). See:
+  #     https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl'
+  #   required: true
+  #   default: 'private'
   access_key_id:
-    description: "S3 Access Key ID"
+    description: 'S3 Access Key ID'
     required: true
   secret_access_key:
-    description: "S3 Secret Access Key"
+    description: 'S3 Secret Access Key'
     required: true
   region:
-    description: "S3 Region"
+    description: 'S3 Region'
     required: true
-    default: "us-east-1"
+    default: 'us-east-1'
   bucket:
-    description: "S3 Bucket Name"
+    description: 'S3 Bucket Name'
     required: true
   endpoint:
-    description: "S3 Endpoint URL"
+    description: 'S3 Endpoint URL'
     required: false
+# outputs:
+#   s3_responses:
+#     description: "Your output description here"
 runs:
-  using: "node20"
-  main: "index.js"
+  using: 'node20'
+  main: 'dist/index.js'
